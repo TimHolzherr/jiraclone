@@ -1,0 +1,7 @@
+bin\
+ojb\
+appsettings.Development.json
+localhostCertificate.pfx
+.gitignore
+.vscode\
+
