@@ -4,5 +4,6 @@ services:
   jiraclone:
     build:
       context: .
+    image: timholzherr/jiraclone:latest
     ports:
       - "8080:80"
