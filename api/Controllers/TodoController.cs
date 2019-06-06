@@ -3,87 +3,86 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TodoApi.Models;
+using TicketApi.Models;
 
-namespace TodoApi.Controllers
+namespace TicketApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TodoController : ControllerBase
+    public class TicketController : ControllerBase
     {
-        private readonly TodoContext _context;
+        private readonly TicketContext _context;
 
-        public TodoController(TodoContext context)
+        public TicketController(TicketContext context)
         {
             _context = context;
 
-            if (_context.TodoItems.Count() == 0)
+            if (_context.Tickets.Count() == 0)
             {
-                // Create a new TodoItem if collection is empty,
-                // which means you can't delete all TodoItems.
-                _context.TodoItems.Add(new TodoItem { Name = "Item1" });
+                _context.Tickets.Add(new Ticket
+                {
+                    Name = "Fix critical Bug",
+                    Description = "Fix the bug",
+                    Owner = "You",
+                    IsComplete = false
+                });
                 _context.SaveChanges();
             }
         }
 
-        // GET: api/Todo
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItems()
+        public async Task<ActionResult<IEnumerable<Ticket>>> GetTickets()
         {
-            return await _context.TodoItems.ToListAsync();
+            return await _context.Tickets.ToListAsync();
         }
 
-        // GET: api/Todo/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TodoItem>> GetTodoItem(long id)
+        public async Task<ActionResult<Ticket>> GetTicket(long id)
         {
-            var todoItem = await _context.TodoItems.FindAsync(id);
+            var ticket = await _context.Tickets.FindAsync(id);
 
-            if (todoItem == null)
+            if (ticket == null)
             {
                 return NotFound();
             }
 
-            return todoItem;
+            return ticket;
         }
 
-        // POST: api/Todo
         [HttpPost]
-        public async Task<ActionResult<TodoItem>> PostTodoItem(TodoItem item)
+        public async Task<ActionResult<Ticket>> PostTicket(Ticket ticket)
         {
-            _context.TodoItems.Add(item);
+            _context.Tickets.Add(ticket);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetTodoItem), new { id = item.Id }, item);
+            return CreatedAtAction(nameof(GetTicket), new { id = ticket.Id }, ticket);
         }
 
-        // PUT: api/Todo/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTodoItem(long id, TodoItem item)
+        public async Task<IActionResult> PutTicket(long id, Ticket ticket)
         {
-            if (id != item.Id)
+            if (id != ticket.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(item).State = EntityState.Modified;
+            _context.Entry(ticket).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        // DELETE: api/Todo/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTodoItem(long id)
+        public async Task<IActionResult> DeleteTicket(long id)
         {
-            var todoItem = await _context.TodoItems.FindAsync(id);
+            var ticket = await _context.Tickets.FindAsync(id);
 
-            if (todoItem == null)
+            if (ticket == null)
             {
                 return NotFound();
             }
 
-            _context.TodoItems.Remove(todoItem);
+            _context.Tickets.Remove(ticket);
             await _context.SaveChangesAsync();
 
             return NoContent();
