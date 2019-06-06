@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.InMemory;
 using TodoApi.Models;
 
 namespace JiraClone
@@ -28,6 +29,7 @@ namespace JiraClone
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("ToDoList"))
                 .AddControllers()
                 .AddNewtonsoftJson();
         }
