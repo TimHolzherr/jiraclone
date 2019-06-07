@@ -1,0 +1,8 @@
+api/bin
+api/ojb
+api/appsettings.Development.json
+api/localhostCertificate.pfx
+api/.gitignore
+api/.vscode
+api/wwwroot
+client/node_modules

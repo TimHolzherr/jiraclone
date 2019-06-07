@@ -4,4 +4,4 @@ appsettings.Development.json
 localhostCertificate.pfx
 .gitignore
 .vscode\
-
+wwwroot
