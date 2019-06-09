@@ -1,13 +1,14 @@
 import React from "react";
 import "./Table.css";
 
-// import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Fab from "@material-ui/core/Fab";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 let id = 0;
 function createData(
@@ -38,7 +39,7 @@ const rows = [
 
 const myTable: React.FC = () => {
   return (
-    <Paper>
+    <Paper> 
       <Table>
         <TableHead>
           <TableRow>
@@ -62,7 +63,9 @@ const myTable: React.FC = () => {
                   <input type="checkbox" checked={row.isComplete} />
                 </TableCell>
                 <TableCell>
-                  <button>Delete</button>
+                  <Fab aria-label="Delete" size="small" color="inherit">
+                    <DeleteIcon />
+                  </Fab>
                 </TableCell>
               </TableRow>
             );
