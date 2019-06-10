@@ -10,9 +10,25 @@ const App: React.FC = () => {
       <div className="table-wrapper">
         <Table />
       </div>
-      <Button  className="main-button" variant="contained" color="primary">
+      <Button variant="contained" color="primary">
         Add new Ticket
       </Button>
+      <div className="backdrop">
+        <div className="modal">
+          <h2>Create new Ticket</h2>
+          <form>
+            <label htmlFor="name">Name</label>
+            <input type="text" id="name" required />
+            <label htmlFor="description">Description</label>
+            <input type="text" id="description" required />
+            <label htmlFor="owner">Owner</label>
+            <input type="text" id="owner" required />
+            <Button variant="contained" color="primary">
+              Add new Ticket
+            </Button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

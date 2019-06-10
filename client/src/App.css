@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  min-height: 100vh;
+  position: relative;
 }
 
 .table-wrapper {
@@ -11,10 +13,41 @@
   margin-bottom: 1em;
 }
 
-.main-button {
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 10;
 }
 
-/* .MuiFab-root {
-  width: 3em !important;
-  height: 3em !important;
-} */
+.modal {
+  position: relative;
+  padding: 1em 0 1em 0;
+  background: white;
+  z-index: 20;
+  border-radius: 0.5em;
+  width: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+input:invalid {
+  box-shadow: 0 0 5px 0px red;
+}
+
+label {
+  display: block;
+  margin-bottom: 4px;
+}
+
+input {
+  padding: 1px 0px;
+  display: block;
+  margin: 0 auto 1em auto;
+  border: 1px solid black;
+  border-radius: 3px;
+}
