@@ -21,3 +21,20 @@ h2 {
   margin-bottom: 1em;
   font-weight: 800;
 }
+
+label {
+  display: block;
+  margin-bottom: 4px;
+}
+
+input {
+  padding: 1px 0px;
+  display: block;
+  margin: 0 auto 1em auto;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+input:invalid {
+  box-shadow: 0 0 5px 0px red;
+}

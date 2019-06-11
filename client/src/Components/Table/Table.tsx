@@ -9,37 +9,14 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Fab from "@material-ui/core/Fab";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { Ticket } from "../../Models/Ticket";
 
-let id = 0;
-function createData(
-  name: string,
-  description: string,
-  owner: string,
-  isComplete: boolean
-) {
-  id += 1;
-  return { id, name, description, owner, isComplete };
-}
-
-const rows = [
-  createData(
-    "Clean first floor",
-    "Clean everything in the first flor",
-    "Luc",
-    false
-  ),
-  createData(
-    "Create awesome app",
-    "Create app which generates a lot of revenue",
-    "You",
-    false
-  ),
-  createData("Brush your teeth", "Brush your teeth carefully", "Tim", true)
-];
-
-const myTable: React.FC = () => {
+const myTable: React.FC<{
+  tickets: Ticket[];
+  delete: (id: number) => void;
+}> = props => {
   return (
-    <Paper> 
+    <Paper>
       <Table>
         <TableHead>
           <TableRow>
@@ -51,20 +28,20 @@ const myTable: React.FC = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => {
+          {props.tickets.map(ticket => {
             return (
-              <TableRow key={row.id}>
+              <TableRow key={ticket.id}>
                 <TableCell component="th" scope="row">
-                  {row.name}
+                  {ticket.name}
                 </TableCell>
-                <TableCell>{row.description}</TableCell>
-                <TableCell>{row.owner}</TableCell>
+                <TableCell>{ticket.description}</TableCell>
+                <TableCell>{ticket.owner}</TableCell>
                 <TableCell>
-                  <input type="checkbox" checked={row.isComplete} />
+                  <input type="checkbox" checked={ticket.isCompleted} />
                 </TableCell>
                 <TableCell>
                   <Fab aria-label="Delete" size="small" color="inherit">
-                    <DeleteIcon />
+                    <DeleteIcon onClick={() => props.delete(ticket.id)} />
                   </Fab>
                 </TableCell>
               </TableRow>
