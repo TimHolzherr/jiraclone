@@ -20,3 +20,31 @@ export async function createNewTicket(ticket: Ticket): Promise<void> {
   await request;
   return;
 }
+
+export async function updateTicketInBackend(ticket: Ticket): Promise<void> {
+  var request = instance.put(String(ticket.id), ticket);
+  await request;
+  return;
+}
+
+export function registerLoadingInterceptor(
+  isLoading: (value: boolean) => void
+) {
+  let numberOfInflightRequests = 0;
+  instance.interceptors.request.use(request => {
+    numberOfInflightRequests++;
+    isLoading(true);
+    return request;
+  });
+  instance.interceptors.response.use(response => {
+    numberOfInflightRequests--;
+    // wait for callstack to be empty and promises to be resolved
+    // before deciding that all inflight requests are finished
+    setTimeout(() => {
+      if (numberOfInflightRequests === 0) {
+        isLoading(false);
+      }
+    });
+    return response;
+  });
+}

@@ -36,5 +36,5 @@ input {
 }
 
 input:invalid {
-  box-shadow: 0 0 5px 0px red;
+  background-color: rgba(255, 0, 0, 0.2);
 }

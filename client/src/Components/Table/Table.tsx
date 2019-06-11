@@ -14,7 +14,10 @@ import { Ticket } from "../../Models/Ticket";
 const myTable: React.FC<{
   tickets: Ticket[];
   delete: (id: number) => void;
+  update: (ticket: Ticket) => void;
 }> = props => {
+  const updateIsCompleted = (ticket: Ticket) =>
+    props.update({ ...ticket, isCompleted: !ticket.isCompleted });
   return (
     <Paper>
       <Table>
@@ -37,11 +40,22 @@ const myTable: React.FC<{
                 <TableCell>{ticket.description}</TableCell>
                 <TableCell>{ticket.owner}</TableCell>
                 <TableCell>
-                  <input type="checkbox" checked={ticket.isCompleted} />
+                  <input
+                    type="checkbox"
+                    checked={ticket.isCompleted}
+                    onClick={() => updateIsCompleted(ticket)}
+                  />
                 </TableCell>
                 <TableCell>
-                  <Fab aria-label="Delete" size="small" color="inherit">
-                    <DeleteIcon onClick={() => props.delete(ticket.id)} />
+                  <Fab
+                    onClick={() => {
+                      props.delete(ticket.id);
+                    }}
+                    aria-label="Delete"
+                    size="small"
+                    color="inherit"
+                  >
+                    <DeleteIcon />
                   </Fab>
                 </TableCell>
               </TableRow>

@@ -16,18 +16,6 @@ namespace TicketApi.Controllers
         public TicketController(TicketContext context)
         {
             _context = context;
-
-            if (_context.Tickets.Count() == 0)
-            {
-                _context.Tickets.Add(new Ticket
-                {
-                    Name = "Fix critical Bug",
-                    Description = "Fix the bug",
-                    Owner = "You",
-                    IsComplete = false
-                });
-                _context.SaveChanges();
-            }
         }
 
         [HttpGet]
