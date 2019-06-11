@@ -1,5 +1,5 @@
 api/bin
-api/ojb
+api/obj
 api/appsettings.Development.json
 api/localhostCertificate.pfx
 api/.gitignore
