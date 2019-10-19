@@ -21,6 +21,7 @@ An exercise which was part of a job interview.
 docker-compose build
 docker-compose up 
 ```
+app is reachable on port 8080
 
 ## Build and Deploy
 
